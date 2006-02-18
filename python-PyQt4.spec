@@ -56,7 +56,7 @@ dziedzicz±cych z dowolnej klasy Qt4 (np. KDE lub w³asnych).
 
 %package examples
 Summary:	Examples for PyQt4
-Summary(pl):	Przyklady do PyQt4
+Summary(pl):	Przyk³ady do PyQt4
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 
@@ -82,7 +82,7 @@ echo 'yes' | python configure.py \
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_examplesdir}/python/%{module}
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -91,7 +91,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/python/%{module}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_postclean
 
-cp -R examples/* $RPM_BUILD_ROOT%{_examplesdir}/python/%{module}
+cp -R examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -100,6 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog NEWS README THANKS
 %attr(755,root,root) %{_bindir}/*
+%dir %{py_sitedir}/PyQt4
 %attr(755,root,root) %{py_sitedir}/PyQt4/*.so*
 %{py_sitedir}/PyQt4/*.py[co]
 %{py_sitedir}/PyQt4/elementtree
@@ -111,4 +112,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files examples
 %defattr(644,root,root,755)
-%{_examplesdir}/python/PyQt4
+%{_examplesdir}/%{name}-%{version}
