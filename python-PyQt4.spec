@@ -23,6 +23,7 @@ BuildRequires:	qt4-build
 BuildRequires:	qt4-qmake
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	sed >= 4.0
 %pyrequires_eq	python-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -68,6 +69,7 @@ Przyk³adowy kod demonstruj±cy jak u¿ywaæ PyQt4.
 
 %prep
 %setup -q -n %{module}-gpl-snapshot-%{_snap}
+%{__sed} -i 's,pyuic.py,pyuic.pyc,' configure.py
 
 %build
 export QMAKESPEC="%{_datadir}/qt4/mkspecs/default"
