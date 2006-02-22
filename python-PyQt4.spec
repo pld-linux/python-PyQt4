@@ -1,15 +1,16 @@
 %define		module	PyQt4
-%define		_snap	20060216
+%define		snap	20060221
+%define		sipver	2:4.4-0.%{snap}
 
 Summary:	Python bindings for the Qt4 toolkit
 Summary(pl):	Dowi±zania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
 Version:	4.0
-Release:	0.%{_snap}.1
+Release:	0.%{snap}.1
 License:	GPL v2
 Group:		Libraries/Python
-Source0:	http://www.riverbankcomputing.com/Downloads/Snapshots/PyQt4/%{module}-gpl-snapshot-%{_snap}.tar.gz
-# Source0-md5:	2b4fd9f51f5d16c462c02d4f2cc095ea
+Source0:	http://www.riverbankcomputing.com/Downloads/Snapshots/PyQt4/%{module}-gpl-snapshot-%{snap}.tar.gz
+# Source0-md5:	a4bdf1046c4ae686c7769fa3cfd0445f
 URL:		http://www.riverbankcomputing.co.uk/pyqt/index.php
 BuildRequires:	QtAssistant-devel
 BuildRequires:	QtGui-devel
@@ -18,13 +19,14 @@ BuildRequires:	QtOpenGL-devel
 BuildRequires:	QtSql-devel
 BuildRequires:	QtSvg-devel
 BuildRequires:	QtXml-devel
-BuildRequires:	python-sip-devel >= 4.4
+BuildRequires:	python-sip-devel >= %{sipver}
 BuildRequires:	qt4-build
 BuildRequires:	qt4-qmake
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	sed >= 4.0
 %pyrequires_eq	python-libs
+Requires:	python-sip >= %{sipver}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
@@ -68,17 +70,17 @@ Examples code demonstrating how to use the Python bindings for Qt4.
 Przyk³adowy kod demonstruj±cy jak u¿ywaæ PyQt4.
 
 %prep
-%setup -q -n %{module}-gpl-snapshot-%{_snap}
+%setup -q -n %{module}-gpl-snapshot-%{snap}
 %{__sed} -i 's,pyuic.py,pyuic.pyc,' configure.py
 
 %build
-export QMAKESPEC="%{_datadir}/qt4/mkspecs/default"
 echo 'yes' | python configure.py \
 	-c -j 3 \
 	-b %{_bindir} \
 	-d %{py_sitedir} \
-	-q %{_prefix} \
-	-v %{_sipfilesdir}
+	-q "%{_libdir}/qt4" \
+	-v %{_sipfilesdir} \
+	LIBDIR_QT="%{_libdir}"
 
 %{__make}
 
