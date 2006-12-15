@@ -1,16 +1,15 @@
 %define		module	PyQt4
-%define		snap	20060221
-%define		sipver	2:4.4-0.%{snap}
+%define		sipver  2:4.5.1-1
 
 Summary:	Python bindings for the Qt4 toolkit
 Summary(pl):	Dowi±zania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
-Version:	4.0
-Release:	0.%{snap}.1
+Version:	4.1.1
+Release:	1
 License:	GPL v2
 Group:		Libraries/Python
-Source0:	http://www.riverbankcomputing.com/Downloads/Snapshots/PyQt4/%{module}-gpl-snapshot-%{snap}.tar.gz
-# Source0-md5:	a4bdf1046c4ae686c7769fa3cfd0445f
+Source0:	http://www.riverbankcomputing.com/Downloads/PyQt4/GPL/PyQt-x11-gpl-%{version}.tar.gz
+# Source0-md5:	0e7cb6191603cd18f6f4767e1867f7bc
 URL:		http://www.riverbankcomputing.co.uk/pyqt/index.php
 BuildRequires:	QtAssistant-devel
 BuildRequires:	QtGui-devel
@@ -70,16 +69,16 @@ Examples code demonstrating how to use the Python bindings for Qt4.
 Przyk³adowy kod demonstruj±cy jak u¿ywaæ PyQt4.
 
 %prep
-%setup -q -n %{module}-gpl-snapshot-%{snap}
+%setup -q -n PyQt-x11-gpl-%{version}
 %{__sed} -i 's,pyuic.py,pyuic.pyc,' configure.py
 
 %build
 echo 'yes' | python configure.py \
 	-c -j 3 \
 	-b %{_bindir} \
-	-d %{py_sitedir} \
-	-q "%{_libdir}/qt4" \
-	-v %{_sipfilesdir} \
+	-d %{py_sitedir}/%{module} \
+	-q "%{_bindir}/qt4-qmake" \
+	-v %{_sipfilesdir}/%{module} \
 	LIBDIR_QT="%{_libdir}"
 
 %{__make}
