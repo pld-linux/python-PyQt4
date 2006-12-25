@@ -18,6 +18,7 @@ BuildRequires:	QtOpenGL-devel
 BuildRequires:	QtSql-devel
 BuildRequires:	QtSvg-devel
 BuildRequires:	QtXml-devel
+BuildRequires:	QtTest-devel
 BuildRequires:	python-sip-devel >= %{sipver}
 BuildRequires:	qt4-build
 BuildRequires:	qt4-qmake
