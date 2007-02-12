@@ -2,7 +2,7 @@
 %define		sipver  2:4.5.1-1
 
 Summary:	Python bindings for the Qt4 toolkit
-Summary(pl):	Dowi±zania do toolkitu Qt4 dla Pythona
+Summary(pl.UTF-8):   DowiÄ…zania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
 Version:	4.1.1
 Release:	1
@@ -37,14 +37,14 @@ PyQt4 is a set of Python bindings for the Qt4 toolkit. The bindings
 are implemented as a set of Python modules: QtAssistant, QtCore,
 QtGui, QtNetwork, QtOpenGL, QtSql, QtSvg and QtXml.
 
-%description -l pl
-PyQt4 to zbiór dowi±zañ do Qt4 dla Pythona. Dowi±zania zosta³y
-zaimplementowane jako modu³y Pythona: QtAssistant, QtCore, QtGui,
+%description -l pl.UTF-8
+PyQt4 to zbiÃ³r dowiÄ…zaÅ„ do Qt4 dla Pythona. DowiÄ…zania zostaÅ‚y
+zaimplementowane jako moduÅ‚y Pythona: QtAssistant, QtCore, QtGui,
 QtNetwork, QtOpenGL, QtSql, QtSvg i QtXml.
 
 %package devel
 Summary:	Files needed to build other bindings based on Qt4
-Summary(pl):	Pliki potrzebne do budowania innych dowi±zañ bazowanych na Qt4
+Summary(pl.UTF-8):   Pliki potrzebne do budowania innych dowiÄ…zaÅ„ bazowanych na Qt4
 Group:		Development/Languages/Python
 Requires:	%{name} = %{version}-%{release}
 Requires:	python-sip-devel
@@ -53,21 +53,21 @@ Requires:	python-sip-devel
 Files needed to build other bindings for C++ classes that inherit from
 any of the Qt4 classes (e.g. KDE or your own).
 
-%description devel -l pl
-Pliki potrzebne do budowania innych dowi±zañ do klas C++
-dziedzicz±cych z dowolnej klasy Qt4 (np. KDE lub w³asnych).
+%description devel -l pl.UTF-8
+Pliki potrzebne do budowania innych dowiÄ…zaÅ„ do klas C++
+dziedziczÄ…cych z dowolnej klasy Qt4 (np. KDE lub wÅ‚asnych).
 
 %package examples
 Summary:	Examples for PyQt4
-Summary(pl):	Przyk³ady do PyQt4
+Summary(pl.UTF-8):   PrzykÅ‚ady do PyQt4
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 
 %description examples
 Examples code demonstrating how to use the Python bindings for Qt4.
 
-%description examples -l pl
-Przyk³adowy kod demonstruj±cy jak u¿ywaæ PyQt4.
+%description examples -l pl.UTF-8
+PrzykÅ‚adowy kod demonstrujÄ…cy jak uÅ¼ywaÄ‡ PyQt4.
 
 %prep
 %setup -q -n PyQt-x11-gpl-%{version}
