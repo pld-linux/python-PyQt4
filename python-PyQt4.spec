@@ -2,7 +2,7 @@
 %define		sipver  2:4.5.1-1
 
 Summary:	Python bindings for the Qt4 toolkit
-Summary(pl.UTF-8):   Dowiązania do toolkitu Qt4 dla Pythona
+Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
 Version:	4.1.1
 Release:	1
@@ -44,7 +44,7 @@ QtNetwork, QtOpenGL, QtSql, QtSvg i QtXml.
 
 %package devel
 Summary:	Files needed to build other bindings based on Qt4
-Summary(pl.UTF-8):   Pliki potrzebne do budowania innych dowiązań bazowanych na Qt4
+Summary(pl.UTF-8):	Pliki potrzebne do budowania innych dowiązań bazowanych na Qt4
 Group:		Development/Languages/Python
 Requires:	%{name} = %{version}-%{release}
 Requires:	python-sip-devel
@@ -59,7 +59,7 @@ dziedziczących z dowolnej klasy Qt4 (np. KDE lub własnych).
 
 %package examples
 Summary:	Examples for PyQt4
-Summary(pl.UTF-8):   Przykłady do PyQt4
+Summary(pl.UTF-8):	Przykłady do PyQt4
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 
