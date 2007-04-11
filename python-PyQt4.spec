@@ -1,15 +1,15 @@
 %define		module	PyQt4
-%define		sipver  2:4.5.1-1
+%define		sipver  2:4.6
 
 Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
-Version:	4.1.1
+Version:	4.2
 Release:	1
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/Downloads/PyQt4/GPL/PyQt-x11-gpl-%{version}.tar.gz
-# Source0-md5:	0e7cb6191603cd18f6f4767e1867f7bc
+# Source0-md5:	af4baa7f7441914f9a527ef3cf788fef
 URL:		http://www.riverbankcomputing.co.uk/pyqt/index.php
 BuildRequires:	QtAssistant-devel
 BuildRequires:	QtGui-devel
