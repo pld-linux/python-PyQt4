@@ -5,7 +5,7 @@ Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
 Version:	4.3
-Release:	0.2
+Release:	1	
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/Downloads/PyQt4/GPL/PyQt-x11-gpl-%{version}.tar.gz
@@ -78,7 +78,7 @@ Przykładowy kod demonstrujący jak używać PyQt4.
 echo 'yes' | python configure.py \
 	-c -j 3 \
 	-b %{_bindir} \
-	-d %{py_sitedir}/%{module} \
+	-d %{py_sitedir} \
 	-q "%{_bindir}/qt4-qmake" \
 	-v %{_sipfilesdir}/%{module} \
 	LIBDIR_QT="%{_libdir}"
