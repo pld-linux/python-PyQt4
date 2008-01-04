@@ -21,8 +21,8 @@ BuildRequires:	QtSvg-devel
 BuildRequires:	QtXml-devel
 BuildRequires:	QtTest-devel
 BuildRequires:	python-sip-devel >= %{sipver}
-BuildRequires:	qt4-build
-BuildRequires:	qt4-qmake
+BuildRequires:	qt4-build >= 4.3.3-3
+BuildRequires:	qt4-qmake >= 4.3.3-3
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	sed >= 4.0
@@ -79,7 +79,7 @@ echo 'yes' | python configure.py \
 	-c -j 3 \
 	-b %{_bindir} \
 	-d %{py_sitedir} \
-	-q "%{_bindir}/qt4-qmake" \
+	-q "%{_bindir}/qmake-qt4" \
 	-v %{_sipfilesdir}/%{module} \
 	LIBDIR_QT="%{_libdir}"
 
