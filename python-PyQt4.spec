@@ -5,7 +5,7 @@ Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
 Version:	4.4.2
-Release:	0.1
+Release:	0.2
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
@@ -81,7 +81,9 @@ echo 'yes' | python configure.py \
 	-d %{py_sitedir} \
 	-q "%{_bindir}/qmake-qt4" \
 	-v %{_sipfilesdir}/%{module} \
-	LIBDIR_QT="%{_libdir}"
+	LIBDIR_QT="%{_libdir}" \
+	CC="%{__cc}" \
+	CXX="%{__cxx}"
 
 %{__make}
 
@@ -91,6 +93,8 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+install -D $RPM_BUILD_ROOT{%{py_sitescriptdir},%{py_sitedir}}/dbus/mainloop/qt.so
 
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
@@ -107,8 +111,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %dir %{py_sitedir}/PyQt4
 %attr(755,root,root) %{py_sitedir}/PyQt4/*.so*
+%attr(755,root,root) %{py_sitedir}/dbus/mainloop/qt.so
 %{py_sitedir}/PyQt4/*.py[co]
 %{py_sitedir}/PyQt4/uic
+%{_datadir}/qt4/qsci/api/python/PyQt4.api
 
 %files devel
 %defattr(644,root,root,755)
