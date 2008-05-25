@@ -5,7 +5,7 @@ Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
 Version:	4.4.2
-Release:	0.2
+Release:	1
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
@@ -20,6 +20,7 @@ BuildRequires:	QtSql-devel
 BuildRequires:	QtSvg-devel
 BuildRequires:	QtXml-devel
 BuildRequires:	QtTest-devel
+BuildRequires:	python-dbus-devel >= 0.80
 BuildRequires:	python-sip-devel >= %{sipver}
 BuildRequires:	qt4-build >= 4.3.3-3
 BuildRequires:	qt4-qmake >= 4.3.3-3
@@ -111,6 +112,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %dir %{py_sitedir}/PyQt4
 %attr(755,root,root) %{py_sitedir}/PyQt4/*.so*
+%dir %{py_sitedir}/dbus
+%dir %{py_sitedir}/dbus/mainloop
 %attr(755,root,root) %{py_sitedir}/dbus/mainloop/qt.so
 %{py_sitedir}/PyQt4/*.py[co]
 %{py_sitedir}/PyQt4/uic
