@@ -95,8 +95,6 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -D $RPM_BUILD_ROOT{%{py_sitescriptdir},%{py_sitedir}}/dbus/mainloop/qt.so
-
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_postclean
@@ -112,9 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %dir %{py_sitedir}/PyQt4
 %attr(755,root,root) %{py_sitedir}/PyQt4/*.so*
-%dir %{py_sitedir}/dbus
-%dir %{py_sitedir}/dbus/mainloop
-%attr(755,root,root) %{py_sitedir}/dbus/mainloop/qt.so
+%attr(755,root,root) %{py_sitescriptdir}/dbus/mainloop/qt.so
 %{py_sitedir}/PyQt4/*.py[co]
 %{py_sitedir}/PyQt4/uic
 %{_datadir}/qt4/qsci/api/python/PyQt4.api
