@@ -1,3 +1,15 @@
+# 
+# TODO:
+# make[1]: Entering directory `/home/BUILD/PyQt-x11-gpl-4.4.2/designer'
+#install -m 755 -p "libpythonplugin.so" "/usr/lib/qt4/plugins/designer/libpythonplugin.so"
+#install: cannot create regular file `/usr/lib/qt4/plugins/designer/libpythonplugin.so': Permission denied
+#make[1]: [install_target] Error 1 (ignored)
+#strip --strip-unneeded "/usr/lib/qt4/plugins/designer/libpythonplugin.so"
+#strip: '/usr/lib/qt4/plugins/designer/libpythonplugin.so': No such file
+#make[1]: [install_target] Error 1 (ignored)
+#cp -f -r /home/BUILD/PyQt-x11-gpl-4.4.2/designer/python /usr/lib/qt4/plugins/designer/
+#cp: cannot create directory `/usr/lib/qt4/plugins/designer/python': Permission denied
+
 %define		module	PyQt4
 %define		sipver  2:4.7.5
 
@@ -110,7 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %dir %{py_sitedir}/PyQt4
 %attr(755,root,root) %{py_sitedir}/PyQt4/*.so*
-%attr(755,root,root) %{py_sitescriptdir}/dbus/mainloop/qt.so
+%attr(755,root,root) %{py_sitedir}/dbus/mainloop/qt.so
 %{py_sitedir}/PyQt4/*.py[co]
 %{py_sitedir}/PyQt4/uic
 %{_datadir}/qt4/qsci/api/python/PyQt4.api
