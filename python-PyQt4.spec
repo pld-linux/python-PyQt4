@@ -1,14 +1,4 @@
-# 
-# TODO:
-# make[1]: Entering directory `/home/BUILD/PyQt-x11-gpl-4.4.2/designer'
-#install -m 755 -p "libpythonplugin.so" "/usr/lib/qt4/plugins/designer/libpythonplugin.so"
-#install: cannot create regular file `/usr/lib/qt4/plugins/designer/libpythonplugin.so': Permission denied
-#make[1]: [install_target] Error 1 (ignored)
-#strip --strip-unneeded "/usr/lib/qt4/plugins/designer/libpythonplugin.so"
-#strip: '/usr/lib/qt4/plugins/designer/libpythonplugin.so': No such file
-#make[1]: [install_target] Error 1 (ignored)
-#cp -f -r /home/BUILD/PyQt-x11-gpl-4.4.2/designer/python /usr/lib/qt4/plugins/designer/
-#cp: cannot create directory `/usr/lib/qt4/plugins/designer/python': Permission denied
+# TODO: package /usr/lib/qt4/plugins/designer/* ?
 
 %define		module	PyQt4
 %define		sipver  2:4.7.5
@@ -105,7 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT INSTALL_ROOT=$RPM_BUILD_ROOT
 
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
@@ -125,7 +115,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py_sitedir}/dbus/mainloop/qt.so
 %{py_sitedir}/PyQt4/*.py[co]
 %{py_sitedir}/PyQt4/uic
-%{_datadir}/qt4/qsci/api/python/PyQt4.api
+# There is no such file
+#%{_datadir}/qt4/qsci/api/python/PyQt4.api
 
 %files devel
 %defattr(644,root,root,755)
