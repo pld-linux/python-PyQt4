@@ -20,8 +20,8 @@ BuildRequires:	QtOpenGL-devel
 BuildRequires:	QtScript-devel
 BuildRequires:	QtSql-devel
 BuildRequires:	QtSvg-devel
-BuildRequires:	QtXml-devel
 BuildRequires:	QtTest-devel
+BuildRequires:	QtXml-devel
 BuildRequires:	python-dbus-devel >= 0.80
 BuildRequires:	python-sip-devel >= %{sipver}
 BuildRequires:	qt4-build >= 4.3.3-3
@@ -112,11 +112,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %dir %{py_sitedir}/PyQt4
 %attr(755,root,root) %{py_sitedir}/PyQt4/*.so*
-%attr(755,root,root) %{py_sitedir}/dbus/mainloop/qt.so
+%attr(755,root,root) %{py_sitescriptdir}/dbus/mainloop/qt.so
+%attr(755,root,root) %{_libdir}/qt4/plugins/designer/libpythonplugin.so
 %{py_sitedir}/PyQt4/*.py[co]
 %{py_sitedir}/PyQt4/uic
-# There is no such file
-#%{_datadir}/qt4/qsci/api/python/PyQt4.api
+%{_datadir}/qt4/qsci/api/python/PyQt4.api
 
 %files devel
 %defattr(644,root,root,755)
