@@ -14,17 +14,23 @@ Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%
 # Source0-md5:	89e84c36a8520bf8b3a8a2b20e765154
 URL:		http://www.riverbankcomputing.com/software/pyqt/
 BuildRequires:	QtAssistant-devel
+BuildRequires:	QtDesigner-devel
 BuildRequires:	QtGui-devel
+BuildRequires:	QtHelp-devel
 BuildRequires:	QtNetwork-devel
 BuildRequires:	QtOpenGL-devel
 BuildRequires:	QtScript-devel
 BuildRequires:	QtSql-devel
 BuildRequires:	QtSvg-devel
 BuildRequires:	QtTest-devel
+BuildRequires:	QtWebKit-devel
 BuildRequires:	QtXml-devel
+BuildRequires:	QtXmlPatterns-devel
+BuildRequires:	pkgconfig
 BuildRequires:	python-dbus-devel >= 0.80
 BuildRequires:	python-sip-devel >= %{sipver}
 BuildRequires:	qt4-build >= 4.3.3-3
+BuildRequires:	qt4-phonon-devel
 BuildRequires:	qt4-qmake >= 4.3.3-3
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
@@ -39,12 +45,17 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 PyQt4 is a set of Python bindings for the Qt4 toolkit. The bindings
 are implemented as a set of Python modules: QtAssistant, QtCore,
-QtGui, QtNetwork, QtOpenGL, QtSql, QtSvg and QtXml.
+QtDesigner, QtGui, QtHelp, QtNetwork, QtOpenGL, QtScript, QtSql,
+QtSvg, QtTest, QtWebKit, QtXmlPatterns and QtXml.
+
+QtCore QtGui QtNetwork QtOpenGL QtScript
+QtSql QtSvg QtTest QtXml QtXmlPatterns QtAssistant
 
 %description -l pl.UTF-8
 PyQt4 to zbiór dowiązań do Qt4 dla Pythona. Dowiązania zostały
-zaimplementowane jako moduły Pythona: QtAssistant, QtCore, QtGui,
-QtNetwork, QtOpenGL, QtSql, QtSvg i QtXml.
+zaimplementowane jako moduły Pythona: QtAssistant, QtCore, QtDesigner,
+QtGui, QtHelp, QtNetwork, QtOpenGL, QtScript, QtSql, QtSvg, QtTest,
+QtWebKit, QtXmlPatterns i QtXml.
 
 %package devel
 Summary:	Files needed to build other bindings based on Qt4
@@ -73,6 +84,16 @@ Examples code demonstrating how to use the Python bindings for Qt4.
 %description examples -l pl.UTF-8
 Przykładowy kod demonstrujący jak używać PyQt4.
 
+%package -n qscintilla2-%{module}-api
+Summary:	PyQt4 API file for QScintilla
+Group:		Libraries/Python
+Requires:	python-qscintilla2 >= 2.2-2
+
+%description -n qscintilla2-%{module}-api
+PyQt4 API file can be used by the QScintilla editor component to
+enable the use of auto-completion and call tips when editing PyQt4
+code.
+
 %prep
 %setup -q -n PyQt-x11-gpl-%{version}
 %{__sed} -i 's,pyuic.py,pyuic.pyc,' configure.py
@@ -80,6 +101,7 @@ Przykładowy kod demonstrujący jak używać PyQt4.
 %build
 echo 'yes' | python configure.py \
 	-c -j 3 \
+	-a \
 	-b %{_bindir} \
 	-d %{py_sitedir} \
 	-q "%{_bindir}/qmake-qt4" \
@@ -116,7 +138,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt4/plugins/designer/libpythonplugin.so
 %{py_sitedir}/PyQt4/*.py[co]
 %{py_sitedir}/PyQt4/uic
-%{_datadir}/qt4/qsci/api/python/PyQt4.api
 
 %files devel
 %defattr(644,root,root,755)
@@ -125,3 +146,7 @@ rm -rf $RPM_BUILD_ROOT
 %files examples
 %defattr(644,root,root,755)
 %{_examplesdir}/%{name}-%{version}
+
+%files -n qscintilla2-%{module}-api
+%defattr(644,root,root,755)
+%{_datadir}/qt4/qsci/api/python/PyQt4.api
