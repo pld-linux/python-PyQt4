@@ -49,9 +49,6 @@ are implemented as a set of Python modules: QtAssistant, QtCore,
 QtDesigner, QtGui, QtHelp, QtNetwork, QtOpenGL, QtScript, QtSql,
 QtSvg, QtTest, QtWebKit, QtXmlPatterns and QtXml.
 
-QtCore QtGui QtNetwork QtOpenGL QtScript
-QtSql QtSvg QtTest QtXml QtXmlPatterns QtAssistant
-
 %description -l pl.UTF-8
 PyQt4 to zbiór dowiązań do Qt4 dla Pythona. Dowiązania zostały
 zaimplementowane jako moduły Pythona: QtAssistant, QtCore, QtDesigner,
