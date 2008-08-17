@@ -87,6 +87,7 @@ Przykładowy kod demonstrujący jak używać PyQt4.
 
 %package -n qscintilla2-%{module}-api
 Summary:	PyQt4 API file for QScintilla
+Summary(pl.UTF-8):	Plik API PyQt4 dla QScintilli
 Group:		Libraries/Python
 Requires:	python-qscintilla2 >= 2.2-2
 
@@ -94,6 +95,11 @@ Requires:	python-qscintilla2 >= 2.2-2
 PyQt4 API file can be used by the QScintilla editor component to
 enable the use of auto-completion and call tips when editing PyQt4
 code.
+
+%description -n qscintilla2-%{module}-api -l pl.UTF-8
+Plik API PyQt4 może być używany przez komponent edytora QScintilla aby
+umożliwić automatyczne dopełnianie i podpowiedzi przy modyfikowaniu
+kodu wykorzystującego PyQt4.
 
 %prep
 %setup -q -n PyQt-x11-gpl-%{version}
@@ -118,7 +124,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT INSTALL_ROOT=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	INSTALL_ROOT=$RPM_BUILD_ROOT
 
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
@@ -133,10 +140,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog NEWS README THANKS
 %attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/qt4/plugins/designer/libpythonplugin.so
 %dir %{py_sitedir}/PyQt4
 %attr(755,root,root) %{py_sitedir}/PyQt4/*.so*
-%attr(755,root,root) %{py_sitescriptdir}/dbus/mainloop/qt.so
-%attr(755,root,root) %{_libdir}/qt4/plugins/designer/libpythonplugin.so
+%attr(755,root,root) %{py_sitedir}/dbus/mainloop/qt.so
 %{py_sitedir}/PyQt4/*.py[co]
 %{py_sitedir}/PyQt4/uic
 
