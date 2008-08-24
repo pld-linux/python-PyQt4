@@ -1,0 +1,24 @@
+--- PyQt-x11-gpl-4.4.3/configure.py.orig	2008-08-08 16:09:58.000000000 +0200
++++ PyQt-x11-gpl-4.4.3/configure.py	2008-08-24 21:30:54.555681941 +0200
+@@ -146,6 +146,9 @@
+     p.add_option("-g", "--consolidate", action="store_true", default=False,
+             dest="bigqt", help="create a single module which links against "
+             "all the Qt libraries")
++    p.add_option("--dbus-path", action="callback", default=None,
++		    dest="pydbusmoddir", metavar="DIR", callback=store_abspath_dir,
++		    type="string", help="path to install dbus module")
+ 
+     # These are internal options used to build the mega Windows GPL package.
+     p.add_option("--mwg-odbc", action="store_true", default=False,
+@@ -1055,7 +1058,10 @@
+         return
+ 
+     global pydbusmoddir
+-    pydbusmoddir = dbus.mainloop.__path__[0]
++    if opts.pydbusmoddir:
++	    pydbusmoddir = opts.pydbusmoddir
++    else:
++	    pydbusmoddir = dbus.mainloop.__path__[0]
+ 
+     # Try and find dbus-python.h.  We don't use pkg-config because it is broken
+     # for dbus-python (at least for versions up to and including v0.81.0).
