@@ -1,4 +1,6 @@
-# TODO: package /usr/lib/qt4/plugins/designer/* ?
+# TODO: 
+#  - package /usr/lib/qt4/plugins/designer/* ?
+#  - better place for %{py_sitedir}/dbus{,/mainloop} dirs ?
 
 %define		module	PyQt4
 %define		sipver  2:4.7.5
@@ -7,11 +9,12 @@ Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
 Version:	4.4.3
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
 # Source0-md5:	89e84c36a8520bf8b3a8a2b20e765154
+Patch0:		%{name}-dbuspath.patch
 URL:		http://www.riverbankcomputing.com/software/pyqt/
 BuildRequires:	QtAssistant-devel
 BuildRequires:	QtDesigner-devel
@@ -101,6 +104,7 @@ kodu wykorzystującego PyQt4.
 %prep
 %setup -q -n PyQt-x11-gpl-%{version}
 %{__sed} -i 's,pyuic.py,pyuic.pyc,' configure.py
+%patch0 -p1
 
 %build
 echo 'yes' | python configure.py \
@@ -110,6 +114,7 @@ echo 'yes' | python configure.py \
 	-d %{py_sitedir} \
 	-q "%{_bindir}/qmake-qt4" \
 	-v %{_sipfilesdir}/%{module} \
+	--dbus-path="%{py_sitedir}/dbus/mainloop" \
 	LIBDIR_QT="%{_libdir}" \
 	CC="%{__cc}" \
 	CXX="%{__cxx}"
@@ -140,6 +145,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt4/plugins/designer/libpythonplugin.so
 %dir %{py_sitedir}/PyQt4
 %attr(755,root,root) %{py_sitedir}/PyQt4/*.so*
+%dir %{py_sitedir}/dbus
+%dir %{py_sitedir}/dbus/mainloop
 %attr(755,root,root) %{py_sitedir}/dbus/mainloop/qt.so
 %{py_sitedir}/PyQt4/*.py[co]
 %{py_sitedir}/PyQt4/uic
