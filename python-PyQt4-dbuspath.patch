@@ -1,11 +1,10 @@
 --- PyQt-x11-gpl-4.4.3/configure.py.orig	2008-08-08 16:09:58.000000000 +0200
 +++ PyQt-x11-gpl-4.4.3/configure.py	2008-08-24 21:30:54.555681941 +0200
-@@ -146,6 +146,9 @@
+@@ -146,6 +146,8 @@
      p.add_option("-g", "--consolidate", action="store_true", default=False,
              dest="bigqt", help="create a single module which links against "
              "all the Qt libraries")
-+    p.add_option("--dbus-path", action="callback", default=None,
-+		    dest="pydbusmoddir", metavar="DIR", callback=store_abspath_dir,
++    p.add_option("--dbus-path", default=None, dest="pydbusmoddir", metavar="DIR",
 +		    type="string", help="path to install dbus module")
  
      # These are internal options used to build the mega Windows GPL package.
