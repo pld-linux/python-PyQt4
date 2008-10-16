@@ -15,6 +15,7 @@ Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
 # Source0-md5:	89e84c36a8520bf8b3a8a2b20e765154
 Patch0:		%{name}-dbuspath.patch
+Patch1:		%{name}-64bit.patch
 URL:		http://www.riverbankcomputing.com/software/pyqt/
 BuildRequires:	QtAssistant-devel
 BuildRequires:	QtDesigner-devel
@@ -105,6 +106,7 @@ kodu wykorzystującego PyQt4.
 %setup -q -n PyQt-x11-gpl-%{version}
 %{__sed} -i 's,pyuic.py,pyuic.pyc,' configure.py
 %patch0 -p1
+%patch1 -p1
 
 %build
 echo 'yes' | python configure.py \
