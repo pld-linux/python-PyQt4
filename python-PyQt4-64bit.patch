@@ -1,0 +1,23 @@
+diff -up PyQt-x11-gpl-4.4.3/configure.py.64bit PyQt-x11-gpl-4.4.3/configure.py
+--- PyQt-x11-gpl-4.4.3/configure.py.64bit	2008-08-08 09:09:58.000000000 -0500
++++ PyQt-x11-gpl-4.4.3/configure.py	2008-08-14 10:38:22.000000000 -0500
+@@ -755,16 +755,15 @@ include(%s)
+             else:
+                 # Use distutils to get the additional configuration.
+                 from distutils.sysconfig import get_config_vars
++                from distutils.sysconfig import get_python_lib
+                 ducfg = get_config_vars()
+ 
+                 if sys.platform == "darwin":
+                     # We need to work out how to specify the right framework
+                     # version.
+                     link = "-framework Python"
+-                elif ("--enable-shared" in ducfg.get("CONFIG_ARGS", "") and
+-                      glob.glob("%s/lib/libpython%d.%d*" % (ducfg["prefix"], py_major, py_minor))):
+-                    lib_dir_flag = quote("-L%s/lib" % ducfg["prefix"])
+-                    link = "%s -lpython%d.%d" % (lib_dir_flag, py_major, py_minor)
++                elif ("--enable-shared" in ducfg.get("CONFIG_ARGS", "") ): 
++                    link = "-L%s -lpython%d.%d" % (get_python_lib(plat_specific=1, standard_lib=1), py_major, py_minor)
+                 else:
+                     sipconfig.inform("Qt Designer plugin disabled because Python library is static")
+                     enabled = False
