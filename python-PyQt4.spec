@@ -3,17 +3,19 @@
 #  - better place for %{py_sitedir}/dbus{,/mainloop} dirs ?
 
 %define		module	PyQt4
-%define		sipver  2:4.7.8
+%define		sipver  2:4.8
+%define		snap	20090529
 
 Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
-Version:	4.4.4
-Release:	2
+Version:	4.5
+Release:	0.%{snap}.1
 License:	GPL v2
 Group:		Libraries/Python
-Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
-# Source0-md5:	4bd346d56d10452e47ac71e2cbe04229
+#Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
+Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}-snapshot-%{snap}.tar.gz
+# Source0-md5:	f0a5c6e69b7552017906daae1f63fa8a
 Patch0:		%{name}-dbuspath.patch
 Patch1:		%{name}-64bit.patch
 URL:		http://www.riverbankcomputing.com/software/pyqt/
@@ -103,7 +105,7 @@ umożliwić automatyczne dopełnianie i podpowiedzi przy modyfikowaniu
 kodu wykorzystującego PyQt4.
 
 %prep
-%setup -q -n PyQt-x11-gpl-%{version}
+%setup -q -n PyQt-x11-gpl-%{version}-snapshot-%{snap}
 %{__sed} -i 's,pyuic.py,pyuic.pyc,' configure.py
 %patch0 -p1
 %patch1 -p1
