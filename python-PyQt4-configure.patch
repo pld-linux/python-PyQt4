@@ -1,0 +1,76 @@
+--- configure.py	2009-06-16 10:37:38.000000000 +0200
++++ configure.py.new	2009-07-04 04:47:49.000000000 +0200
+@@ -43,6 +43,7 @@
+ 
+ qt_version = 0
+ qt_edition = ""
++qt_licensee = None
+ qt_dir = None
+ qt_incdir = None
+ qt_libdir = None
+@@ -909,6 +910,9 @@
+ 
+     sipconfig.inform("Qt v%s %sis being used." % (sipconfig.version_to_string(qt_version), edstr))
+ 
++    if qt_licensee:
++        sipconfig.inform("Qt is licensed to %s." % qt_licensee)
++
+     if sys.platform == "darwin" and qt_framework:
+         sipconfig.inform("Qt is built as a framework.")
+ 
+@@ -1465,9 +1469,8 @@
+     sipconfig.inform("This is the %s version of PyQt %s (licensed under the %s) for Python %s on %s." % (ltype, pyqt_version_str, lname, sys.version.split()[0], sys.platform))
+ 
+     # Common checks.
+-    if qt_edition and ltype != "internal":
+-        if qt_edition != "free" and ltype == "GPL":
+-            sipconfig.error("This version of PyQt and the %s edition of Qt have incompatible licenses." % qt_edition)
++    if qt_licensee and ltype == "GPL":
++        sipconfig.error("This version of PyQt and the commercial version of Qt have incompatible licenses.")
+ 
+     # Confirm the license if not already done.
+     if not opts.license_confirmed:
+@@ -1675,6 +1678,8 @@
+     out << QT_VERSION << '\\n';
+     out << QT_EDITION << '\\n';
+ 
++    out << QLibraryInfo::licensee() << '\\n';
++
+ #if defined(QT_SHARED) || defined(QT_DLL)
+     out << "shared\\n";
+ #else
+@@ -1761,7 +1766,7 @@
+     f.close()
+ 
+     global qt_dir, qt_incdir, qt_libdir, qt_bindir, qt_datadir, qt_pluginsdir
+-    global qt_version, qt_edition, qt_shared, qt_xfeatures
++    global qt_version, qt_edition, qt_licensee, qt_shared, qt_xfeatures
+ 
+     qt_dir = lines[0]
+     qt_incdir = lines[1]
+@@ -1771,8 +1776,12 @@
+     qt_pluginsdir = lines[5]
+     qt_version = lines[6]
+     qt_edition = lines[7]
+-    qt_shared = "y"
+-    qt_xfeatures = lines[9:]
++    qt_licensee = lines[8]
++    qt_shared = "y"
++    qt_xfeatures = lines[10:]
++
++    if qt_licensee == 'Open Source':
++        qt_licensee = None
+ 
+     try:
+         qt_version = int(qt_version)
+@@ -1789,6 +1798,10 @@
+     if qt_edition & 0x200:
+         # It has ActiveQt.
+         qt_edition = "Desktop"
++
++        # ActiveQt became part of the open source version in v4.5.2.
++        if qt_version >= 0x040502 and qt_licensee is None:
++            qt_edition = "free"
+     elif qt_edition & 0x008:
+         # It has OpenGL.
+         qt_edition = "free"
