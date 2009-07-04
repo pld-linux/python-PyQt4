@@ -9,13 +9,14 @@ Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
 Version:	4.5.1
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
 # Source0-md5:	80e877799ae8fb82f137c43fda18bff5
 Patch0:		%{name}-dbuspath.patch
 Patch1:		%{name}-64bit.patch
+Patch2:		%{name}-configure.patch
 URL:		http://www.riverbankcomputing.com/software/pyqt/
 BuildRequires:	QtAssistant-devel
 BuildRequires:	QtDesigner-devel
@@ -109,6 +110,7 @@ kodu wykorzystującego PyQt4.
 %{__sed} -i 's/qt_shared = lines\[8\]/qt_shared = "y"/' configure.py
 %patch0 -p1
 %patch1 -p1
+%patch2 -p0
 
 %build
 echo 'yes' | python configure.py \
