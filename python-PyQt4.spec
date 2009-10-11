@@ -3,17 +3,17 @@
 #  - better place for %{py_sitedir}/dbus{,/mainloop} dirs ?
 
 %define		module	PyQt4
-%define		sipver  2:4.8.2
+%define		sipver  2:4.9
 
 Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
-Version:	4.5.4
+Version:	4.6
 Release:	1
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
-# Source0-md5:	b721266d14c450dd7045025e042819ec
+# Source0-md5:	e03ad1d98b0cf803743e08258f0004d1
 Patch0:		%{name}-dbuspath.patch
 Patch1:		%{name}-64bit.patch
 URL:		http://www.riverbankcomputing.com/software/pyqt/
