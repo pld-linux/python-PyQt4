@@ -8,12 +8,12 @@
 Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
-Version:	4.6.1
+Version:	4.6.2
 Release:	1
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
-# Source0-md5:	4e5b75486d2934a7fa5215b056e28761
+# Source0-md5:	b7aba1b0e41d674b0ebcb64844f442f7
 Patch0:		%{name}-dbuspath.patch
 Patch1:		%{name}-64bit.patch
 URL:		http://www.riverbankcomputing.com/software/pyqt/
