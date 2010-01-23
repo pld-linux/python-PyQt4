@@ -1,4 +1,4 @@
-# TODO: 
+# TODO:
 #  - package /usr/lib/qt4/plugins/designer/* ?
 #  - better place for %{py_sitedir}/dbus{,/mainloop} dirs ?
 
@@ -107,11 +107,12 @@ kodu wykorzystującego PyQt4.
 %{__sed} -i 's,pyuic.py,pyuic.pyc,' configure.py
 # small hack to build for shared libs - symbol QT_SHARED not defined anymore?
 %{__sed} -i 's/qt_shared = lines\[.*\]/qt_shared = "y"/' configure.py
+%{__sed} -i 's/resp = sys.stdin.readline.*/resp = "yes"/' configure.py
 %patch0 -p1
 %patch1 -p1
 
 %build
-echo 'yes' | python configure.py \
+python configure.py \
 	-c -j 3 \
 	-a \
 	-b %{_bindir} \
