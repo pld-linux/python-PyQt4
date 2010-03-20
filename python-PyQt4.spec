@@ -8,12 +8,12 @@
 Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
-Version:	4.7
+Version:	4.7.2
 Release:	1
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
-# Source0-md5:	4882179ab4da128aaa8520f146afb955
+# Source0-md5:	e7782e9146ec8aa0e76bcdb0ca5b9491
 Patch0:		%{name}-dbuspath.patch
 Patch1:		%{name}-64bit.patch
 URL:		http://www.riverbankcomputing.com/software/pyqt/
@@ -145,7 +145,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog NEWS README THANKS
+%doc NEWS README THANKS
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/qt4/plugins/designer/libpythonplugin.so
 %dir %{py_sitedir}/PyQt4
