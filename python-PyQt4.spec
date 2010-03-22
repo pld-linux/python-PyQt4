@@ -9,7 +9,7 @@ Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
 Version:	4.7.2
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
@@ -136,7 +136,14 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
-%py_postclean
+
+# don't use py_postclean, leave *.py in %{py_sitedir}/PyQt4/uic/widget-plugins
+rm $RPM_BUILD_ROOT%{py_sitedir}/PyQt4/*.py
+rm $RPM_BUILD_ROOT%{py_sitedir}/PyQt4/uic/*.py
+rm $RPM_BUILD_ROOT%{py_sitedir}/PyQt4/uic/Compiler/*.py
+rm $RPM_BUILD_ROOT%{py_sitedir}/PyQt4/uic/Loader/*.py
+rm $RPM_BUILD_ROOT%{py_sitedir}/PyQt4/uic/port_v2/*.py
+rm $RPM_BUILD_ROOT%{py_sitedir}/PyQt4/uic/port_v3/*.py
 
 cp -R examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
