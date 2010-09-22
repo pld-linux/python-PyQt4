@@ -3,21 +3,20 @@
 #  - better place for %{py_sitedir}/dbus{,/mainloop} dirs ?
 
 %define		module	PyQt4
-%define		sipver  2:4.10.5
+%define		sipver  2:4.11.1
 
 Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
-Version:	4.7.4
-Release:	3
+Version:	4.7.7
+Release:	1
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
-# Source0-md5:	88e9f1bc467cccf424d2032e3470982c
+# Source0-md5:	b7b30ab25ee976407b37052f2f724bce
 Patch0:		%{name}-dbuspath.patch
 Patch1:		%{name}-64bit.patch
 URL:		http://www.riverbankcomputing.com/software/pyqt/
-BuildRequires:	QtAssistant-devel
 BuildRequires:	QtDesigner-devel
 BuildRequires:	QtGui-devel
 BuildRequires:	QtHelp-devel
@@ -49,13 +48,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 PyQt4 is a set of Python bindings for the Qt4 toolkit. The bindings
-are implemented as a set of Python modules: QtAssistant, QtCore,
-QtDesigner, QtGui, QtHelp, QtNetwork, QtOpenGL, QtScript, QtSql,
-QtSvg, QtTest, QtWebKit, QtXmlPatterns and QtXml.
+are implemented as a set of Python modules: QtCore, QtDesigner, QtGui,
+QtHelp, QtNetwork, QtOpenGL, QtScript, QtSql, QtSvg, QtTest, QtWebKit,
+QtXmlPatterns and QtXml.
 
 %description -l pl.UTF-8
 PyQt4 to zbiór dowiązań do Qt4 dla Pythona. Dowiązania zostały
-zaimplementowane jako moduły Pythona: QtAssistant, QtCore, QtDesigner,
+zaimplementowane jako moduły Pythona: QtCore, QtDesigner,
 QtGui, QtHelp, QtNetwork, QtOpenGL, QtScript, QtSql, QtSvg, QtTest,
 QtWebKit, QtXmlPatterns i QtXml.
 
