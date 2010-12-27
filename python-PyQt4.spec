@@ -3,7 +3,7 @@
 #  - better place for %{py_sitedir}/dbus{,/mainloop} dirs ?
 
 %define		module	PyQt4
-%define		sipver  2:4.11.2
+%define		sipver  2:4.12
 
 Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
