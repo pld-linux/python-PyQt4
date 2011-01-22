@@ -9,7 +9,7 @@ Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
 Version:	4.8.2
-Release:	1
+Release:	3
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
@@ -17,18 +17,24 @@ Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%
 Patch0:		%{name}-dbuspath.patch
 Patch1:		%{name}-64bit.patch
 URL:		http://www.riverbankcomputing.com/software/pyqt/
+# most of BR comes from configure.py
+BuildRequires:	QtCore-devel
+BuildRequires:	QtDeclarative-devel
 BuildRequires:	QtDesigner-devel
 BuildRequires:	QtGui-devel
 BuildRequires:	QtHelp-devel
+BuildRequires:	QtMultimedia-devel
 BuildRequires:	QtNetwork-devel
 BuildRequires:	QtOpenGL-devel
 BuildRequires:	QtScript-devel
+BuildRequires:	QtScriptTools-devel
 BuildRequires:	QtSql-devel
 BuildRequires:	QtSvg-devel
 BuildRequires:	QtTest-devel
 BuildRequires:	QtWebKit-devel
 BuildRequires:	QtXml-devel
 BuildRequires:	QtXmlPatterns-devel
+BuildRequires:	phonon-devel
 BuildRequires:	pkgconfig
 BuildRequires:	python-dbus-devel >= 0.80
 BuildRequires:	python-sip-devel >= %{sipver}
@@ -54,9 +60,9 @@ QtXmlPatterns and QtXml.
 
 %description -l pl.UTF-8
 PyQt4 to zbiór dowiązań do Qt4 dla Pythona. Dowiązania zostały
-zaimplementowane jako moduły Pythona: QtCore, QtDesigner,
-QtGui, QtHelp, QtNetwork, QtOpenGL, QtScript, QtSql, QtSvg, QtTest,
-QtWebKit, QtXmlPatterns i QtXml.
+zaimplementowane jako moduły Pythona: QtCore, QtDesigner, QtGui,
+QtHelp, QtNetwork, QtOpenGL, QtScript, QtSql, QtSvg, QtTest, QtWebKit,
+QtXmlPatterns i QtXml.
 
 %package devel
 Summary:	Files needed to build other bindings based on Qt4
@@ -112,6 +118,7 @@ kodu wykorzystującego PyQt4.
 
 %build
 python configure.py \
+	--confirm-license \
 	-c -j 3 \
 	-a \
 	-b %{_bindir} \
