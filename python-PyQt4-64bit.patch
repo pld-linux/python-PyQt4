@@ -4,7 +4,7 @@
              else:
                  # Use distutils to get the additional configuration.
                  from distutils.sysconfig import get_config_vars
-+		from distutils.sysconfig import get_python_lib
++                from distutils.sysconfig import get_python_lib
                  ducfg = get_config_vars()
  
                  if sys.platform == "darwin":
@@ -14,7 +14,7 @@
 -                elif ("--enable-shared" in ducfg.get("CONFIG_ARGS", "") and
 -                      glob.glob("%s/lib/libpython%d.%d*" % (ducfg["exec_prefix"], py_major, py_minor))):
 -                    lib_dir_flag = quote("-L%s/lib" % ducfg["exec_prefix"])
--                    link = "%s -lpython%d.%d" % (lib_dir_flag, py_major, py_minor)
+-                    link = "%s -lpython%d.%d%s" % (lib_dir_flag, py_major, py_minor, abi)
 +                elif ("--enable-shared" in ducfg.get("CONFIG_ARGS", "") ): 
 +                    link = "-L%s -lpython%d.%d" % (get_python_lib(plat_specific=1, standard_lib=1), py_major, py_minor)
                  else:
