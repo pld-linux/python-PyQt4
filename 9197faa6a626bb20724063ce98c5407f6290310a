@@ -1,0 +1,5 @@
+- updated License (GPL v3 is allowed too; noted exception)
+- updated APIs list
+- separated -devel-tools (pylupdate4, pyrcc4, pyuic4) as not required at runtime
+- dbus/mainloop tree belongs to python-dbus
+- release 3
