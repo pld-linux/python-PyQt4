@@ -1,23 +1,24 @@
 %define		module	PyQt4
 # minimal required sip version
-%define		sip_ver	2:4.12.2
+%define		sip_ver	2:4.13.1
 # last qt version covered by these bindings (minimal required is currently 4.1.0)
-%define		qt_ver	4.7.2
+%define		qt_ver	4.8.0
 
 Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
-Version:	4.8.6
+Version:	4.9
 Release:	1
 License:	GPL v2 or GPL v3 with FLOSS exception
 Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
-# Source0-md5:	9bfd7b08b8e438b83cc50d5c58191f97
+# Source0-md5:	61619500d09d87b6c2a25bd3ea994504
 Patch0:		%{name}-dbuspath.patch
 Patch1:		%{name}-64bit.patch
 URL:		http://www.riverbankcomputing.com/software/pyqt/
 # most of BR comes from configure.py
 BuildRequires:	QtCore-devel >= %{qt_ver}
+BuildRequires:	QtDBus-devel >= %{qt_ver}
 BuildRequires:	QtDeclarative-devel >= %{qt_ver}
 BuildRequires:	QtDesigner-devel >= %{qt_ver}
 BuildRequires:	QtGui-devel >= %{qt_ver}
@@ -175,6 +176,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/PyQt4
 %attr(755,root,root) %{py_sitedir}/PyQt4/Qt.so
 %attr(755,root,root) %{py_sitedir}/PyQt4/QtCore.so
+%attr(755,root,root) %{py_sitedir}/PyQt4/QtDBus.so
 %attr(755,root,root) %{py_sitedir}/PyQt4/QtDeclarative.so
 %attr(755,root,root) %{py_sitedir}/PyQt4/QtDesigner.so
 %attr(755,root,root) %{py_sitedir}/PyQt4/QtGui.so
