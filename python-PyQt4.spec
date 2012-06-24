@@ -1,18 +1,18 @@
 %define		module	PyQt4
 # minimal required sip version
-%define		sip_ver	2:4.13.1
+%define		sip_ver	2:4.13.3
 # last qt version covered by these bindings (minimal required is currently 4.1.0)
 %define		qt_ver	4.8.0
 
 Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
 Name:		python-%{module}
-Version:	4.9.1
+Version:	4.9.2
 Release:	1
 License:	GPL v2 or GPL v3 with FLOSS exception
 Group:		Libraries/Python
 Source0:	http://www.riverbankcomputing.com/static/Downloads/PyQt4/PyQt-x11-gpl-%{version}.tar.gz
-# Source0-md5:	7f495dc49f71e3bfb64bf942e0d8bb3c
+# Source0-md5:	df3f588118697d6d16f7ffddb141d0d2
 Patch0:		%{name}-dbuspath.patch
 Patch1:		%{name}-64bit.patch
 URL:		http://www.riverbankcomputing.com/software/pyqt/

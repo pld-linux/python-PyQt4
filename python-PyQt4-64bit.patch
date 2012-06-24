@@ -1,28 +1,28 @@
---- PyQt-x11-gpl-4.8.4/configure.py~	2011-07-01 15:32:10.000000000 +0200
-+++ PyQt-x11-gpl-4.8.4/configure.py	2011-07-01 15:33:57.466398732 +0200
-@@ -946,22 +946,15 @@
+--- PyQt-x11-gpl-4.9.2/configure.py.orig	2012-06-23 22:27:26.000000000 +0200
++++ PyQt-x11-gpl-4.9.2/configure.py	2012-06-23 22:31:20.495786424 +0200
+@@ -965,6 +965,7 @@
              else:
                  # Use distutils to get the additional configuration.
                  from distutils.sysconfig import get_config_vars
 +                from distutils.sysconfig import get_python_lib
                  ducfg = get_config_vars()
  
-                 if sys.platform == "darwin":
-                     # We need to work out how to specify the right framework
-                     # version.
-                     link = "-framework Python"
--                elif "--enable-shared" in ducfg.get("CONFIG_ARGS", ""):
+                 config_args = ducfg.get("CONFIG_ARGS", "")
+@@ -979,16 +980,7 @@
+                     dynamic_pylib = "--enable-shared" in config_args
+ 
+                 if dynamic_pylib:
 -                    if glob.glob("%s/lib/libpython%d.%d*" % (ducfg["exec_prefix"], py_major, py_minor)):
 -                        lib_dir_flag = quote("-L%s/lib" % ducfg["exec_prefix"])
 -                    elif glob.glob("%s/libpython%d.%d*" % (ducfg["LIBDIR"], py_major, py_minor)):
 -                        lib_dir_flag = quote("-L%s" % ducfg["LIBDIR"])
 -                    else:
 -                        sipconfig.inform("Qt Designer plugin disabled because Python library couldn't be found")
+-                        lib_dir_flag = ''
 -                        opts.designer_plugin = False
 -
 -                    link = "%s -lpython%d.%d%s" % (lib_dir_flag, py_major, py_minor, abi)
-+                elif ("--enable-shared" in ducfg.get("CONFIG_ARGS", "") ):
-+                    link = "-L%s -lpython%d.%d" % (get_python_lib(plat_specific=1, standard_lib=1), py_major, py_minor)
++                    link = "-L%s -lpython%d.%d%s" % (get_python_lib(plat_specific=1, standard_lib=1), py_major, py_minor, abi)
                  else:
                      sipconfig.inform("Qt Designer plugin disabled because Python library is static")
                      opts.designer_plugin = False
