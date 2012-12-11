@@ -1,6 +1,6 @@
 %define		module	PyQt4
 # minimal required sip version
-%define		sip_ver	2:4.14
+%define		sip_ver	2:4.14.2
 # last qt version covered by these bindings (minimal required is currently 4.1.0)
 %define		qt_ver	4.8.4
 
