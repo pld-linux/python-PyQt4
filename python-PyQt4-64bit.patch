@@ -8,12 +8,14 @@
                  ducfg = get_config_vars()
  
                  config_args = ducfg.get("CONFIG_ARGS", "")
-@@ -979,16 +980,7 @@
+@@ -979,18 +980,7 @@
                      dynamic_pylib = "--enable-shared" in config_args
  
                  if dynamic_pylib:
 -                    if glob.glob("%s/lib/libpython%d.%d*" % (ducfg["exec_prefix"], py_major, py_minor)):
 -                        lib_dir_flag = quote("-L%s/lib" % ducfg["exec_prefix"])
+-                    elif 'MULTIARCH' in ducfg and glob.glob('%s/lib/%s/libpython%d.%d*' % (ducfg['exec_prefix'], ducfg['MULTIARCH'], py_major, py_minor)):
+-                        lib_dir_flag = quote('-L%s/lib/%s' % (ducfg['exec_prefix'], ducfg['MULTIARCH']))
 -                    elif glob.glob("%s/libpython%d.%d*" % (ducfg["LIBDIR"], py_major, py_minor)):
 -                        lib_dir_flag = quote("-L%s" % ducfg["LIBDIR"])
 -                    else:
