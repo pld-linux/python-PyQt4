@@ -1,8 +1,8 @@
 %define		module	PyQt4
 # minimal required sip version
-%define		sip_ver	2:4.15
+%define		sip_ver	2:4.16
 # last qt version covered by these bindings (minimal required is currently 4.1.0)
-%define		qt_ver	4.8.4
+%define		qt_ver	4.8.6
 
 Summary:	Python bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
