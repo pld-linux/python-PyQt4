@@ -1,11 +1,17 @@
+# TODO: __pycache__ for python3-PyQt4-uic
+#
+# Conditional build:
+%bcond_without	python2	# CPython 2.x modules
+%bcond_without	python3	# CPython 3.x modules
+
 %define		module	PyQt4
 # minimal required sip version
 %define		sip_ver	2:4.16
 # last qt version covered by these bindings (minimal required is currently 4.1.0)
 %define		qt_ver	4.8.6
 
-Summary:	Python bindings for the Qt4 toolkit
-Summary(pl.UTF-8):	Dowiązania do toolkitu Qt4 dla Pythona
+Summary:	Python 2 bindings for the Qt4 toolkit
+Summary(pl.UTF-8):	Wiązania Pythona 2 do toolkitu Qt4
 Name:		python-%{module}
 Version:	4.11.2
 Release:	1
@@ -38,18 +44,24 @@ BuildRequires:	QtXmlPatterns-devel >= %{qt_ver}
 BuildRequires:	phonon-devel
 BuildRequires:	pkgconfig
 BuildRequires:	python-dbus-devel >= 0.80
+%if %{with python2}
+BuildRequires:	python-dbus >= 0.80
 BuildRequires:	python-sip-devel >= %{sip_ver}
+%endif
+%if %{with python3}
+BuildRequires:	python3-dbus >= 0.80
+BuildRequires:	python3-sip-devel >= %{sip_ver}
+%endif
 BuildRequires:	qt4-build >= 4.3.3-3
 BuildRequires:	qt4-qmake >= 4.3.3-3
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	sed >= 4.0
-%pyrequires_eq	python-libs
+Requires:	python-libs
 Requires:	python-dbus >= 0.80
 Requires:	python-sip >= %{sip_ver}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_noautoreqdep	libGL.so.1 libGLU.so.1
 %define		_sipfilesdir	%{_datadir}/sip
 
 %description
@@ -59,39 +71,101 @@ QtDesigner, QtGui, QtHelp, QtMultimedia, QtNetwork, QtOpenGL,
 QtScript, QtScriptTools, QtSql, QtSvg, QtTest, QtWebKit, QtXml,
 QtXmlPatterns and phonon.
 
+This package contains Python 2 bindings.
+
 %description -l pl.UTF-8
-PyQt4 to zbiór dowiązań do Qt4 dla Pythona. Dowiązania zostały
+PyQt4 to zbiór wiązań Qt4 dla Pythona. Dowiązania zostały
 zaimplementowane jako moduły Pythona: QtCore, QtDeclarative,
 QtDesigner, QtGui, QtHelp, QtMultimedia, QtNetwork, QtOpenGL,
 QtScript, QtScriptTools, QtSql, QtSvg, QtTest, QtWebKit, QtXml,
 QtXmlPatterns oraz phonon.
 
-%package devel
-Summary:	Files needed to build other bindings based on Qt4
-Summary(pl.UTF-8):	Pliki potrzebne do budowania innych dowiązań opartych na Qt4
-Group:		Development/Languages/Python
+Ten pakiet zawiera wiązania Pythona 2.
+
+%package uic
+Summary:	pyuic4 development tool for Python 2
+Summary(pl.UTF-8):	Narzędzie programistyczne pyuic4 dla Pythona 2
+Group:		Development/Tools
 Requires:	%{name} = %{version}-%{release}
-Requires:	python-sip-devel
+
+%description uic
+pyuic4 development tool for Python 2.
+
+%description uic -l pl.UTF-8
+Narzędzie programistyczne pyuic4 dla Pythona 2.
+
+%package -n python3-PyQt4
+Summary:	Python 2 bindings for the Qt4 toolkit
+Summary(pl.UTF-8):	Wiązania Pythona 2 do toolkitu Qt4
+Group:		Libraries/Python
+Requires:	python3-libs
+Requires:	python3-dbus >= 0.80
+Requires:	python3-sip >= %{sip_ver}
+
+%description -n python3-PyQt4
+PyQt4 is a set of Python bindings for the Qt4 toolkit. The bindings
+are implemented as a set of Python modules: QtCore, QtDeclarative,
+QtDesigner, QtGui, QtHelp, QtMultimedia, QtNetwork, QtOpenGL,
+QtScript, QtScriptTools, QtSql, QtSvg, QtTest, QtWebKit, QtXml,
+QtXmlPatterns and phonon.
+
+This package contains Python 3 bindings.
+
+%description -n python3-PyQt4 -l pl.UTF-8
+PyQt4 to zbiór wiązań Qt4 dla Pythona. Dowiązania zostały
+zaimplementowane jako moduły Pythona: QtCore, QtDeclarative,
+QtDesigner, QtGui, QtHelp, QtMultimedia, QtNetwork, QtOpenGL,
+QtScript, QtScriptTools, QtSql, QtSvg, QtTest, QtWebKit, QtXml,
+QtXmlPatterns oraz phonon.
+
+Ten pakiet zawiera wiązania Pythona 3.
+
+%package -n python3-PyQt4-uic
+Summary:	pyuic4 development tool for Python 3
+Summary(pl.UTF-8):	Narzędzie programistyczne pyuic4 dla Pythona 3
+Group:		Development/Tools
+Requires:	python3-PyQt4 = %{version}-%{release}
+
+%description -n python3-PyQt4-uic
+pyuic4 development tool for Python 3.
+
+%description -n python3-PyQt4-uic -l pl.UTF-8
+Narzędzie programistyczne pyuic4 dla Pythona 3.
+
+%package devel
+Summary:	SIP files needed to build other bindings based on Qt4
+Summary(pl.UTF-8):	Pliki SIP potrzebne do budowania innych wiązań opartych na Qt4
+Group:		Development/Languages/Python
+Requires:	sip >= %{sip_ver}
 
 %description devel
-Files needed to build other bindings for C++ classes that inherit from
-any of the Qt4 classes (e.g. KDE or your own).
+SIP files needed to build other bindings for C++ classes that inherit
+from any of the Qt4 classes (e.g. KDE or your own).
+
+Note: this package doesn't depend on Python version.
 
 %description devel -l pl.UTF-8
-Pliki potrzebne do budowania innych dowiązań do klas C++
+Pliki SIP potrzebne do budowania innych wiązań do klas C++
 dziedziczących z dowolnej klasy Qt4 (np. KDE lub własnych).
+
+Uwaga: ten pakiet nie jest zależny od wersji Pythona.
 
 %package devel-tools
 Summary:	PyQt4 development tools
 Summary(pl.UTF-8):	Narzędzia programistyczne PyQt4
-Group:		X11/Development/Libraries
-Requires:	%{name} = %{version}-%{release}
+Group:		Development/Tools
+Requires:	QtCore >= %{qt_ver}
+Requires:	QtXml >= %{qt_ver}
 
 %description devel-tools
-PyQt4 development tools: pylupdate4, pyrcc4, pyuic4.
+PyQt4 development tools: pylupdate4, pyrcc4.
+
+Note: this package doesn't depend on Python version.
 
 %description devel-tools -l pl.UTF-8
-Narzędzia programistyczne PyQt4: pylupdate4, pyrcc4, pyuic4.
+Narzędzia programistyczne PyQt4: pylupdate4, pyrcc4.
+
+Uwaga: ten pakiet nie jest zależny od wersji Pythona.
 
 %package examples
 Summary:	Examples for PyQt4
@@ -104,6 +178,25 @@ Examples code demonstrating how to use the Python bindings for Qt4.
 
 %description examples -l pl.UTF-8
 Przykładowy kod demonstrujący jak używać PyQt4.
+
+%package -n QtDesigner-plugin-pyqt4
+Summary:	Qt Designer plugin for Python plugins with widgets
+Summary(pl.UTF-8):	Wtyczka Qt Designera dla wtyczek Pythona zawierających widgety
+# can build only for one python version
+%if %{with python2}
+Requires:	%{name} = %{version}-%{release}
+%else
+Requires:	python3-PyQt4 = %{version}-%{release}
+%endif
+
+%description -n QtDesigner-plugin-pyqt4
+This is the Qt Designer plugin that collects all the Python plugins it
+can find as a widget collection to Designer.
+
+%description -n QtDesigner-plugin-pyqt4 -l pl.UTF-8
+Ten pakiet zawiera wtyczkę Qt Designera zbierającą wszystkie wtyczki
+Pythona, które jest w stanie znaleźć, jako zestaw widgetów dla
+Designera.
 
 %package -n qscintilla2-%{module}-api
 Summary:	PyQt4 API file for QScintilla
@@ -131,7 +224,9 @@ kodu wykorzystującego PyQt4.
 %patch1 -p1
 
 %build
-%{__python} configure.py \
+install -d build-py2
+cd build-py2
+%{__python} ../configure.py \
 	--confirm-license \
 	-c -j 3 \
 	-a \
@@ -145,12 +240,40 @@ kodu wykorzystującego PyQt4.
 	CXX="%{__cxx}"
 
 %{__make}
+cd ..
+
+install -d build-py3
+cd build-py3
+%{__python3} ../configure.py \
+	--confirm-license \
+	-c -j 3 \
+	-a \
+	-b %{_bindir} \
+	-d %{py3_sitedir} \
+	-q "%{_bindir}/qmake-qt4" \
+	-v %{_sipfilesdir}/%{module} \
+	--dbus-path="%{py3_sitedir}/dbus/mainloop" \
+	LIBDIR_QT="%{_libdir}" \
+	CC="%{__cc}" \
+	CXX="%{__cxx}"
+
+%{__make}
+cd ..
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-%{__make} install \
+%if %{with python3}
+%{__make} -C build-py3 install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	INSTALL_ROOT=$RPM_BUILD_ROOT
+
+%{__mv} $RPM_BUILD_ROOT%{_bindir}/pyuic4{,-3}
+%endif
+
+%if %{with python2}
+%{__make} -C build-py2 install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	INSTALL_ROOT=$RPM_BUILD_ROOT
 
@@ -164,16 +287,17 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 %{__rm} $RPM_BUILD_ROOT%{py_sitedir}/PyQt4/uic/Loader/*.py
 %{__rm} $RPM_BUILD_ROOT%{py_sitedir}/PyQt4/uic/port_v2/*.py
 %{__rm} $RPM_BUILD_ROOT%{py_sitedir}/PyQt4/uic/port_v3/*.py
+%endif
 
 cp -R examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%if %{with python2}
 %files
 %defattr(644,root,root,755)
 %doc GPL_EXCEPTION.TXT NEWS OPENSOURCE-NOTICE.TXT README THANKS
-%attr(755,root,root) %{_libdir}/qt4/plugins/designer/libpyqt4.so
 %dir %{py_sitedir}/PyQt4
 %attr(755,root,root) %{py_sitedir}/PyQt4/Qt.so
 %attr(755,root,root) %{py_sitedir}/PyQt4/QtAssistant.so
@@ -199,6 +323,47 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/PyQt4/pyqtconfig.py[co]
 %attr(755,root,root) %{py_sitedir}/dbus/mainloop/qt.so
 
+%files uic
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pyuic4
+%{py_sitedir}/PyQt4/uic
+%endif
+
+%if %{with python3}
+%files -n python3-PyQt4
+%defattr(644,root,root,755)
+%doc GPL_EXCEPTION.TXT NEWS OPENSOURCE-NOTICE.TXT README THANKS
+%dir %{py3_sitedir}/PyQt4
+%attr(755,root,root) %{py3_sitedir}/PyQt4/Qt.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtAssistant.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtCore.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtDBus.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtDeclarative.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtDesigner.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtGui.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtHelp.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtMultimedia.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtNetwork.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtOpenGL.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtScript.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtScriptTools.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtSql.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtSvg.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtTest.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtWebKit.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtXml.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/QtXmlPatterns.so
+%attr(755,root,root) %{py3_sitedir}/PyQt4/phonon.so
+%{py3_sitedir}/PyQt4/__init__.py
+%{py3_sitedir}/PyQt4/pyqtconfig.py
+%attr(755,root,root) %{py3_sitedir}/dbus/mainloop/qt.so
+
+%files -n python3-PyQt4-uic
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pyuic4-3
+%{py3_sitedir}/PyQt4/uic
+%endif
+
 %files devel
 %defattr(644,root,root,755)
 %{_sipfilesdir}/PyQt4
@@ -207,12 +372,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/pylupdate4
 %attr(755,root,root) %{_bindir}/pyrcc4
-%attr(755,root,root) %{_bindir}/pyuic4
-%{py_sitedir}/PyQt4/uic
 
 %files examples
 %defattr(644,root,root,755)
 %{_examplesdir}/%{name}-%{version}
+
+%files -n QtDesigner-plugin-pyqt4
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/qt4/plugins/designer/libpyqt4.so
 
 %files -n qscintilla2-%{module}-api
 %defattr(644,root,root,755)
