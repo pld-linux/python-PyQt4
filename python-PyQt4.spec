@@ -224,6 +224,7 @@ kodu wykorzystującego PyQt4.
 %patch1 -p1
 
 %build
+%if %{with python2}
 install -d build-py2
 cd build-py2
 %{__python} ../configure.py \
@@ -241,7 +242,9 @@ cd build-py2
 
 %{__make}
 cd ..
+%endif
 
+%if %{with python3}
 install -d build-py3
 cd build-py3
 %{__python3} ../configure.py \
@@ -259,6 +262,7 @@ cd build-py3
 
 %{__make}
 cd ..
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
