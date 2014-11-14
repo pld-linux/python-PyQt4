@@ -1,4 +1,6 @@
-# TODO: __pycache__ for python3-PyQt4-uic
+# TODO:
+# -  __pycache__ for python3-PyQt4-uic
+# - should -devel be renamed to sip-PyQt4?
 #
 # Conditional build:
 %bcond_without	python2	# CPython 2.x modules
@@ -6,19 +8,19 @@
 
 %define		module	PyQt4
 # minimal required sip version
-%define		sip_ver	2:4.16
+%define		sip_ver	2:4.16.4
 # last qt version covered by these bindings (minimal required is currently 4.1.0)
 %define		qt_ver	4.8.6
 
 Summary:	Python 2 bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Wiązania Pythona 2 do toolkitu Qt4
 Name:		python-%{module}
-Version:	4.11.2
+Version:	4.11.3
 Release:	1
 License:	GPL v2 or GPL v3 with FLOSS exception
 Group:		Libraries/Python
 Source0:	http://downloads.sourceforge.net/pyqt/PyQt-x11-gpl-%{version}.tar.gz
-# Source0-md5:	6bbb57f6874701adfc6909702f4a4b02
+# Source0-md5:	997c3e443165a89a559e0d96b061bf70
 Patch0:		%{name}-dbuspath.patch
 Patch1:		%{name}-64bit.patch
 URL:		http://www.riverbankcomputing.com/software/pyqt/
