@@ -1,6 +1,4 @@
-# TODO:
-# -  __pycache__ for python3-PyQt4-uic
-# - should -devel be renamed to sip-PyQt4?
+# TODO: __pycache__ for python3-PyQt4-uic
 #
 # Conditional build:
 %bcond_without	python2	# CPython 2.x modules
@@ -16,7 +14,7 @@ Summary:	Python 2 bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Wiązania Pythona 2 do toolkitu Qt4
 Name:		python-%{module}
 Version:	4.11.3
-Release:	1
+Release:	2
 License:	GPL v2 or GPL v3 with FLOSS exception
 Group:		Libraries/Python
 Source0:	http://downloads.sourceforge.net/pyqt/PyQt-x11-gpl-%{version}.tar.gz
@@ -58,7 +56,6 @@ BuildRequires:	qt4-build >= 4.3.3-3
 BuildRequires:	qt4-qmake >= 4.3.3-3
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
-BuildRequires:	sed >= 4.0
 Requires:	python-libs
 Requires:	python-dbus >= 0.80
 Requires:	python-sip >= %{sip_ver}
@@ -134,24 +131,6 @@ pyuic4 development tool for Python 3.
 %description -n python3-PyQt4-uic -l pl.UTF-8
 Narzędzie programistyczne pyuic4 dla Pythona 3.
 
-%package devel
-Summary:	SIP files needed to build other bindings based on Qt4
-Summary(pl.UTF-8):	Pliki SIP potrzebne do budowania innych wiązań opartych na Qt4
-Group:		Development/Languages/Python
-Requires:	sip >= %{sip_ver}
-
-%description devel
-SIP files needed to build other bindings for C++ classes that inherit
-from any of the Qt4 classes (e.g. KDE or your own).
-
-Note: this package doesn't depend on Python version.
-
-%description devel -l pl.UTF-8
-Pliki SIP potrzebne do budowania innych wiązań do klas C++
-dziedziczących z dowolnej klasy Qt4 (np. KDE lub własnych).
-
-Uwaga: ten pakiet nie jest zależny od wersji Pythona.
-
 %package devel-tools
 Summary:	PyQt4 development tools
 Summary(pl.UTF-8):	Narzędzia programistyczne PyQt4
@@ -181,6 +160,21 @@ Examples code demonstrating how to use the Python bindings for Qt4.
 %description examples -l pl.UTF-8
 Przykładowy kod demonstrujący jak używać PyQt4.
 
+%package -n sip-PyQt4
+Summary:	SIP files needed to build other bindings based on Qt4
+Summary(pl.UTF-8):	Pliki SIP potrzebne do budowania innych wiązań opartych na Qt4
+Group:		Development/Languages/Python
+Requires:	sip >= %{sip_ver}
+Obsoletes:	python-PyQt4-devel < 4.11.3-2
+
+%description -n sip-PyQt4
+SIP files needed to build other bindings for C++ classes that inherit
+from any of the Qt4 classes (e.g. KDE or your own).
+
+%description -n sip-PyQt4 -l pl.UTF-8
+Pliki SIP potrzebne do budowania innych wiązań do klas C++
+dziedziczących z dowolnej klasy Qt4 (np. KDE lub własnych).
+
 %package -n QtDesigner-plugin-pyqt4
 Summary:	Qt Designer plugin for Python plugins with widgets
 Summary(pl.UTF-8):	Wtyczka Qt Designera dla wtyczek Pythona zawierających widgety
@@ -204,7 +198,7 @@ Designera.
 Summary:	PyQt4 API file for QScintilla
 Summary(pl.UTF-8):	Plik API PyQt4 dla QScintilli
 Group:		Libraries/Python
-Requires:	python-qscintilla2 >= 2.2-2
+Requires:	qscintilla2-qt4 >= 2.8.4
 
 %description -n qscintilla2-%{module}-api
 PyQt4 API file can be used by the QScintilla editor component to
@@ -370,10 +364,6 @@ rm -rf $RPM_BUILD_ROOT
 %{py3_sitedir}/PyQt4/uic
 %endif
 
-%files devel
-%defattr(644,root,root,755)
-%{_sipfilesdir}/PyQt4
-
 %files devel-tools
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/pylupdate4
@@ -382,6 +372,10 @@ rm -rf $RPM_BUILD_ROOT
 %files examples
 %defattr(644,root,root,755)
 %{_examplesdir}/%{name}-%{version}
+
+%files -n sip-PyQt4
+%defattr(644,root,root,755)
+%{_sipfilesdir}/PyQt4
 
 %files -n QtDesigner-plugin-pyqt4
 %defattr(644,root,root,755)
