@@ -14,7 +14,7 @@ Summary:	Python 2 bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Wiązania Pythona 2 do toolkitu Qt4
 Name:		python-%{module}
 Version:	4.11.4
-Release:	1
+Release:	2
 License:	GPL v2 or GPL v3 with FLOSS exception
 Group:		Libraries/Python
 Source0:	http://downloads.sourceforge.net/pyqt/PyQt-x11-gpl-%{version}.tar.gz
