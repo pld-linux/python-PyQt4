@@ -14,7 +14,7 @@ Summary:	Python 2 bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Wiązania Pythona 2 do toolkitu Qt4
 Name:		python-%{module}
 Version:	4.11.4
-Release:	3
+Release:	4
 License:	GPL v3
 Group:		Libraries/Python
 Source0:	http://downloads.sourceforge.net/pyqt/PyQt-x11-gpl-%{version}.tar.gz
@@ -212,7 +212,6 @@ kodu wykorzystującego PyQt4.
 
 %prep
 %setup -q -n PyQt-x11-gpl-%{version}
-%{__sed} -i 's,pyuic.py,pyuic.pyc,' configure.py
 # small hack to build for shared libs - symbol QT_SHARED not defined anymore?
 %{__sed} -i 's/qt_shared = lines\[.*\]/qt_shared = "y"/' configure.py
 %{__sed} -i 's/resp = sys.stdin.readline.*/resp = "yes"/' configure.py
@@ -270,6 +269,9 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 	INSTALL_ROOT=$RPM_BUILD_ROOT
 
 %{__mv} $RPM_BUILD_ROOT%{_bindir}/pyuic4{,-3}
+
+%py3_comp $RPM_BUILD_ROOT%{py3_sitedir}
+%py3_ocomp $RPM_BUILD_ROOT%{py3_sitedir}
 %endif
 
 %if %{with python2}
@@ -287,6 +289,8 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 %{__rm} $RPM_BUILD_ROOT%{py_sitedir}/PyQt4/uic/Loader/*.py
 %{__rm} $RPM_BUILD_ROOT%{py_sitedir}/PyQt4/uic/port_v2/*.py
 %{__rm} $RPM_BUILD_ROOT%{py_sitedir}/PyQt4/uic/port_v3/*.py
+
+%{__sed} -i 's,pyuic.py,pyuic.pyc,' $RPM_BUILD_ROOT%{_bindir}/pyuic4
 %endif
 
 cp -R examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
@@ -354,6 +358,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py3_sitedir}/PyQt4/QtXml.so
 %attr(755,root,root) %{py3_sitedir}/PyQt4/QtXmlPatterns.so
 %attr(755,root,root) %{py3_sitedir}/PyQt4/phonon.so
+%{py3_sitedir}/PyQt4/__pycache__
 %{py3_sitedir}/PyQt4/__init__.py
 %{py3_sitedir}/PyQt4/pyqtconfig.py
 %attr(755,root,root) %{py3_sitedir}/dbus/mainloop/qt.so
