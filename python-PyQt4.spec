@@ -13,12 +13,12 @@
 Summary:	Python 2 bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Wiązania Pythona 2 do toolkitu Qt4
 Name:		python-%{module}
-Version:	4.11.4
-Release:	5
+Version:	4.12
+Release:	1
 License:	GPL v3
 Group:		Libraries/Python
-Source0:	http://downloads.sourceforge.net/pyqt/PyQt-x11-gpl-%{version}.tar.gz
-# Source0-md5:	2fe8265b2ae2fc593241c2c84d09d481
+Source0:	http://sourceforge.net/projects/pyqt/files/PyQt4/PyQt-%{version}/PyQt4_gpl_x11-%{version}.tar.gz
+# Source0-md5:	eb8c338f2d8842aa7655e8e1aa840bed
 Patch0:		%{name}-dbuspath.patch
 Patch1:		%{name}-64bit.patch
 URL:		http://www.riverbankcomputing.com/software/pyqt/
@@ -211,7 +211,7 @@ umożliwić automatyczne dopełnianie i podpowiedzi przy modyfikowaniu
 kodu wykorzystującego PyQt4.
 
 %prep
-%setup -q -n PyQt-x11-gpl-%{version}
+%setup -q -n PyQt4_gpl_x11-%{version}
 # small hack to build for shared libs - symbol QT_SHARED not defined anymore?
 %{__sed} -i 's/qt_shared = lines\[.*\]/qt_shared = "y"/' configure.py
 %{__sed} -i 's/resp = sys.stdin.readline.*/resp = "yes"/' configure.py
