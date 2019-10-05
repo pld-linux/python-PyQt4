@@ -14,7 +14,8 @@ Summary:	Python 2 bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Wiązania Pythona 2 do toolkitu Qt4
 Name:		python-%{module}
 Version:	4.12.1
-Release:	3
+Release:	4
+Epoch:		1
 License:	GPL v3
 Group:		Libraries/Python
 Source0:	http://downloads.sourceforge.net/pyqt/PyQt4_gpl_x11-%{version}.tar.gz
@@ -85,7 +86,7 @@ Ten pakiet zawiera wiązania Pythona 2.
 Summary:	pyuic4 development tool for Python 2
 Summary(pl.UTF-8):	Narzędzie programistyczne pyuic4 dla Pythona 2
 Group:		Development/Tools
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description uic
 pyuic4 development tool for Python 2.
@@ -123,7 +124,7 @@ Ten pakiet zawiera wiązania Pythona 3.
 Summary:	pyuic4 development tool for Python 3
 Summary(pl.UTF-8):	Narzędzie programistyczne pyuic4 dla Pythona 3
 Group:		Development/Tools
-Requires:	python3-PyQt4 = %{version}-%{release}
+Requires:	python3-PyQt4 = %{epoch}:%{version}-%{release}
 
 %description -n python3-PyQt4-uic
 pyuic4 development tool for Python 3.
@@ -152,7 +153,7 @@ Uwaga: ten pakiet nie jest zależny od wersji Pythona.
 Summary:	Examples for PyQt4
 Summary(pl.UTF-8):	Przykłady do PyQt4
 Group:		Libraries/Python
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description examples
 Examples code demonstrating how to use the Python bindings for Qt4.
@@ -180,9 +181,9 @@ Summary:	Qt Designer plugin for Python plugins with widgets
 Summary(pl.UTF-8):	Wtyczka Qt Designera dla wtyczek Pythona zawierających widgety
 # can build only for one python version
 %if %{with python2}
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 %else
-Requires:	python3-PyQt4 = %{version}-%{release}
+Requires:	python3-PyQt4 = %{epoch}:%{version}-%{release}
 %endif
 
 %description -n QtDesigner-plugin-pyqt4
