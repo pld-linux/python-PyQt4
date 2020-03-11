@@ -44,20 +44,22 @@ BuildRequires:	phonon-devel
 BuildRequires:	pkgconfig
 BuildRequires:	python-dbus-devel >= 0.80
 %if %{with python2}
+BuildRequires:	python-PyQt4-sip-devel >= %{sip_ver}
 BuildRequires:	python-dbus >= 0.80
-BuildRequires:	python-sip-devel >= %{sip_ver}
 %endif
 %if %{with python3}
+BuildRequires:	python3-PyQt4-sip-devel >= %{sip_ver}
 BuildRequires:	python3-dbus >= 0.80
-BuildRequires:	python3-sip-devel >= %{sip_ver}
 %endif
 BuildRequires:	qt4-build >= 4.3.3-3
 BuildRequires:	qt4-qmake >= 4.3.3-3
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.507
+BuildRequires:	sip >= %{sip_ver}
+BuildRequires:	sip < 2:5
 Requires:	python-libs
 Requires:	python-dbus >= 0.80
-Requires:	python-sip >= %{sip_ver}
+Requires:	python-PyQt4-sip >= %{sip_ver}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sipfilesdir	%{_datadir}/sip
@@ -96,9 +98,9 @@ Narzędzie programistyczne pyuic4 dla Pythona 2.
 Summary:	Python 2 bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Wiązania Pythona 2 do toolkitu Qt4
 Group:		Libraries/Python
+Requires:	python3-PyQt4-sip >= %{sip_ver}
 Requires:	python3-libs
 Requires:	python3-dbus >= 0.80
-Requires:	python3-sip >= %{sip_ver}
 
 %description -n python3-PyQt4
 PyQt4 is a set of Python bindings for the Qt4 toolkit. The bindings
@@ -164,6 +166,7 @@ Summary:	SIP files needed to build other bindings based on Qt4
 Summary(pl.UTF-8):	Pliki SIP potrzebne do budowania innych wiązań opartych na Qt4
 Group:		Development/Languages/Python
 Requires:	sip >= %{sip_ver}
+Requires:	sip < 2:5
 Obsoletes:	python-PyQt4-devel < 4.11.3-2
 
 %description -n sip-PyQt4
