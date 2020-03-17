@@ -220,6 +220,8 @@ kodu wykorzystującego PyQt4.
 %patch0 -p1
 %patch1 -p1
 
+find examples -name '*.py' | xargs %{__sed} -i -e '1s,/usr/bin/env python,%{__python},'
+
 %build
 %if %{with python2}
 install -d build-py2
