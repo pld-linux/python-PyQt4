@@ -1,6 +1,7 @@
---- PyQt-x11-gpl-4.4.3/configure.py.orig	2008-08-08 16:09:58.000000000 +0200
-+++ PyQt-x11-gpl-4.4.3/configure.py	2008-08-24 21:30:54.555681941 +0200
-@@ -146,6 +146,8 @@
+diff -urNp -x '*.orig' PyQt4_gpl_x11-4.12.1.org/configure.py PyQt4_gpl_x11-4.12.1/configure.py
+--- PyQt4_gpl_x11-4.12.1.org/configure.py	2021-02-28 13:28:36.840739238 +0100
++++ PyQt4_gpl_x11-4.12.1/configure.py	2021-02-28 13:28:37.047403776 +0100
+@@ -139,6 +139,8 @@ def create_optparser():
      p.add_option("-g", "--consolidate", action="store_true", default=False,
              dest="bigqt", help="create a single module which links against "
              "all the Qt libraries")
@@ -9,7 +10,7 @@
  
      # These are internal options used to build the mega Windows GPL package.
      p.add_option("--mwg-odbc", action="store_true", default=False,
-@@ -1055,7 +1058,10 @@
+@@ -1339,7 +1341,10 @@ def check_dbus():
          return
  
      global pydbusmoddir
