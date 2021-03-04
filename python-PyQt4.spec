@@ -14,7 +14,7 @@ Summary:	Python 2 bindings for the Qt4 toolkit
 Summary(pl.UTF-8):	Wiązania Pythona 2 do toolkitu Qt4
 Name:		python-%{module}
 Version:	4.12.1
-Release:	5
+Release:	6
 Epoch:		1
 License:	GPL v3
 Group:		Libraries/Python
@@ -218,6 +218,11 @@ kodu wykorzystującego PyQt4.
 %{__sed} -i 's/resp = sys.stdin.readline.*/resp = "yes"/' configure.py
 %patch0 -p1
 %patch1 -p1
+
+%{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python(\s|$),#!%{__python}\1,' \
+      examples/*/*/*/*.py \
+      examples/*/*/*.py \
+      examples/*/*.py
 
 %build
 %if %{with python2}
