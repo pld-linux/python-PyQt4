@@ -1,6 +1,6 @@
---- PyQt-x11-gpl-4.9.2/configure.py.orig	2012-06-23 22:27:26.000000000 +0200
-+++ PyQt-x11-gpl-4.9.2/configure.py	2012-06-23 22:31:20.495786424 +0200
-@@ -965,6 +965,7 @@
+--- PyQt4_gpl_x11-4.12.3/configure.py.orig	2022-03-14 17:31:08.314472040 +0100
++++ PyQt4_gpl_x11-4.12.3/configure.py	2022-03-14 17:34:16.250120572 +0100
+@@ -961,6 +961,7 @@ include(%s)
              else:
                  # Use distutils to get the additional configuration.
                  from distutils.sysconfig import get_config_vars
@@ -8,7 +8,7 @@
                  ducfg = get_config_vars()
  
                  config_args = ducfg.get("CONFIG_ARGS", "")
-@@ -979,18 +980,7 @@
+@@ -975,18 +976,7 @@ include(%s)
                      dynamic_pylib = "--enable-shared" in config_args
  
                  if dynamic_pylib:
@@ -26,5 +26,5 @@
 -                    link = "%s -lpython%d.%d%s" % (lib_dir_flag, py_major, py_minor, abi)
 +                    link = "-L%s -lpython%d.%d%s" % (get_python_lib(plat_specific=1, standard_lib=1), py_major, py_minor, abi)
                  else:
-                     sipconfig.inform("Qt Designer plugin disabled because Python library is static")
+                     sipconfig.inform("The Qt Designer plugin was disabled because a dynamic Python library couldn't be found")
                      opts.designer_plugin = False
