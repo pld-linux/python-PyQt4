@@ -1,6 +1,5 @@
-diff -urNp -x '*.orig' PyQt4_gpl_x11-4.12.1.org/configure.py PyQt4_gpl_x11-4.12.1/configure.py
---- PyQt4_gpl_x11-4.12.1.org/configure.py	2021-02-28 13:28:37.354067283 +0100
-+++ PyQt4_gpl_x11-4.12.1/configure.py	2021-02-28 13:28:37.554065223 +0100
+--- PyQt4_gpl_x11-4.12.3/configure.py.orig	2022-03-14 17:31:08.314472040 +0100
++++ PyQt4_gpl_x11-4.12.3/configure.py	2022-03-14 17:34:16.250120572 +0100
 @@ -961,6 +961,7 @@ include(%s)
              else:
                  # Use distutils to get the additional configuration.
