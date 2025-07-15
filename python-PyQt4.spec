@@ -218,8 +218,8 @@ kodu wykorzystującego PyQt4.
 # small hack to build for shared libs - symbol QT_SHARED not defined anymore?
 %{__sed} -i 's/qt_shared = lines\[.*\]/qt_shared = "y"/' configure.py
 %{__sed} -i 's/resp = sys.stdin.readline.*/resp = "yes"/' configure.py
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 find examples -name '*.py' | xargs %{__sed} -i -e '1s,/usr/bin/env python,%{__python},'
 
